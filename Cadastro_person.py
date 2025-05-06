@@ -11,7 +11,15 @@ def menu():
 pessoas = list()
 while True:
     menu()
-    opcao = int(input('Sua opção: '))
+    try:
+        opcao = int(input('Sua opção: '))
+        opcao = int(input('Sua opção: '))
+        if opcao not in [1, 2, 3]:
+            print('\033[31mErro! Esta não é uma das opções válidas.\033[0m')
+            continue
+
+    except (ValueError, TypeError):
+        print('\033[31mErro! Digite um número inteiro válido.\33[0m')
 
     #ver pessoas cadastradas
     if opcao == 1:
@@ -22,8 +30,12 @@ while True:
     #cadastrar nova pessoa
     if opcao == 2:
         while True:
-            person = input('Digite o nome da pessoa: ')
-            pessoas.append(person)
+            try:
+                person = input('Digite o nome da pessoa: ')
+            except (ValueError, TypeError):
+                print('\033[31mErro! Digite novamente.\033[0m')
+            else:
+                pessoas.append(person)
 
             continuar = input('Você deseja continuar? [S/N] ').lower().strip()
             if continuar != 's':
